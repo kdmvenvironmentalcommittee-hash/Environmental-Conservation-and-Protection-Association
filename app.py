@@ -5,56 +5,60 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# CSS මඟින් Clean Dark Blue Modern Theme එක සැකසීම
+# Option 1: Direct Live Dark Ocean Video URL
+video_url = "https://assets.mixkit.co/videos/preview/mixkit-dramatic-dark-stormy-sea-waves-42617-large.mp4"
+
+# CSS මඟින් Live Video Background එක සහ Text Styling සැකසීම
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {
-        background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #1b2a4a 100%);
-    }
-    
-    .main-title {
+    #bgVideo {{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        object-fit: cover;
+        filter: brightness(0.55); /* පසුබිම අඳුරු කර අකුරු පැහැදිලිව පෙන්වීමට */
+    }}
+
+    .main-title {{
         font-size: 26px;
         font-weight: bold;
         text-align: center;
         margin-top: 30px;
         margin-bottom: 5px;
-        color: #64ffda;
-        text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-    }
-    .sub-title {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 6px #000000;
+    }}
+    .sub-title {{
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        color: #e6f1ff;
+        color: #E0E0E0;
         margin-bottom: 5px;
-    }
-    .caption-title {
+        text-shadow: 1px 1px 4px #000000;
+    }}
+    .caption-title {{
         font-size: 14px;
         text-align: center;
-        color: #8892b0;
+        color: #CCCCCC;
         margin-bottom: 30px;
-    }
-    
-    /* Input box style */
-    div[data-baseweb="input"] {
-        background-color: #112240;
-        border-radius: 8px;
-        color: #e6f1ff;
-    }
-    
-    /* Table card style */
-    .stDataFrame {
-        background-color: #112240;
-        border-radius: 10px;
-        padding: 10px;
-    }
+        text-shadow: 1px 1px 4px #000000;
+    }}
     </style>
+
+    <video autoplay loop muted playsinline id="bgVideo">
+        <source src="{video_url}" type="video/mp4">
+    </video>
     """,
     unsafe_allow_html=True
 )
 
-# මාතෘකා තුන මැදට (Center) කිරීම
+# මාතෘකා තුන මැදට (Center) කිරීම - Logo නොමැත
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
