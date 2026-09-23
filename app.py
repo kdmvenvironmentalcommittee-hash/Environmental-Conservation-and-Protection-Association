@@ -5,7 +5,7 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# Direct Live Ocean GIF URL (CORS Block නොවෙන Direct Link එකක්)
+# Direct Live Ocean GIF URL
 bg_gif_url = "https://images.squarespace-cdn.com/content/v1/5829e30a59cc683e9b11eb11/1517409249767-1XRFK3F2B6UOBB81WZXS/storm.gif"
 
 # CSS මඟින් Live GIF Background එක සහ Text Styling සැකසීම
@@ -83,7 +83,7 @@ try:
         if not mask.any():
             mask = df.apply(lambda row: row.astype(str).apply(lambda val: cleaned_query in clean_text(val))).any(axis=1)
 
-viral_df = df[mask]
+        filtered_df = df[mask]
 
         if not filtered_df.empty:
             st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
@@ -99,3 +99,4 @@ viral_df = df[mask]
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
+    
