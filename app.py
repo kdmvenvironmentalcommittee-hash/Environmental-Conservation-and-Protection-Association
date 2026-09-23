@@ -8,7 +8,7 @@ st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 # Option 3: Dark Ocean & Glowing Lights Direct GIF URL
 bg_url = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VvZ290ZDRwbmtzOHByZXk1ZG8xeDV2NWYwazF6OHB4c2g4NWJnOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0xezQGU5xCDJuCPe/giphy.gif"
 
-# CSS මඟින් Background එක සහ Text Styling සකස් කිරීම
+# CSS මඟින් Background එක සහ Text Styling සැකසීම
 st.markdown(
     f"""
     <style>
@@ -103,7 +103,6 @@ try:
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-                    val = row[col]
                     if pd.notna(val) and str(val).strip() != "":
                         valid_data[col] = val
                 
