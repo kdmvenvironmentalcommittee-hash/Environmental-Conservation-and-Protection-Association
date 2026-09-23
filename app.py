@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import re
 
-st.title("තොරතුරු සෙවුම් පද්ධතිය")
+st.title("Information search system
+          Environmental Conservation and Protection Association
+          Program Administrator Division ")
 
 # Google Sheet Direct CSV Link
 sheet_url = "https://docs.google.com/spreadsheets/d/1cl1wUgzu3LUVzHJEMItGYcY4SrwzNs5H9J84ekDMBz8/export?format=csv"
