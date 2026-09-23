@@ -41,14 +41,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Logo එක මැදට පෙන්වීම (Columns 3ක් භාවිතයෙන් හරියටම මැදට ගෙන ඒම)
-col1, col2, col3 = st.columns([1, 1, 1])
-with col2:
-    try:
-        # GitHub එකට Upload කළ logo.png එක මෙතැනින් ලබා ගනී
-        st.image("logo.png", width=160)
-    except Exception:
-        st.warning("logo.png පින්තූරය GitHub Repository එකේ හමු නොවීය.")
+
 
 # මාතෘකා තුන මැදට (Center) කිරීම
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
