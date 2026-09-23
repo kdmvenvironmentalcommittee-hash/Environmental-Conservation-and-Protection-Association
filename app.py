@@ -5,42 +5,56 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# CSS මඟින් Logo එක සහ Titles සියල්ල හරියටම මැදට (Center) කිරීම
+# Live GIF / Background Image URL (ඔබ කැමති සජීවී GIF එකක URL එකක් මෙතැනට යොදන්න)
+# මෙතැන දැනට සොබාදහමට (Nature/Environment) අදාළ ලස්සන Live GIF එකක් යොදා ඇත.
+bg_gif_url = "https://moewalls.com/fantasy/ship-in-storm-live-wallpaper/"
+
+# CSS මඟින් Live Background එකක් යෙදීම සහ Titles මැදට (Center) කිරීම
 st.markdown(
-    """
+    f"""
     <style>
-    .center-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .main-title {
+    /* Live Background / Animated GIF */
+    .stApp {{
+        background-image: url("{bg_gif_url}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    
+    /* Background එකට උඩින් Text පැහැදිලිව පෙනීමට Semi-transparent කාඩ් එකක් සැකසීම */
+    .stApp > header {{
+        background-color: transparent;
+    }}
+    
+    .main-title {{
         font-size: 24px;
         font-weight: bold;
         text-align: center;
         margin-top: 15px;
         margin-bottom: 5px;
-    }
-    .sub-title {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px #000000;
+    }}
+    .sub-title {{
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        color: #B0B0B0;
+        color: #E0E0E0;
         margin-bottom: 5px;
-    }
-    .caption-title {
+        text-shadow: 1px 1px 3px #000000;
+    }}
+    .caption-title {{
         font-size: 14px;
         text-align: center;
-        color: #888888;
+        color: #CCCCCC;
         margin-bottom: 25px;
-    }
+        text-shadow: 1px 1px 3px #000000;
+    }}
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 
 # මාතෘකා තුන මැදට (Center) කිරීම
@@ -97,4 +111,3 @@ try:
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-
