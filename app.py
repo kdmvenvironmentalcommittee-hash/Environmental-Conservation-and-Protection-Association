@@ -40,10 +40,23 @@ try:
 
         if not filtered_df.empty:
             st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
-            st.dataframe(filtered_df, use_container_width=True)
+            
+            # හමුවූ සෑම පුද්ගලයෙකුටම අදාළ දත්ත පමණක් පෙන්වීම
+            for idx, row in filtered_df.iterrows():
+                # හිස් නොවන (Non-empty / Non-NaN) Columns පමණක් තෝරා ගැනීම
+                valid_data = {}
+                for col in df.columns:
+                    val = row[col]
+                    # හිස් සෛල (NaN, None, හෝ Empty String) පරීක්ෂා කිරීම
+                    if pd.notna(val) and str(val).strip() != "":
+                        valid_data[col] = val
+                
+                # දත්ත DataFrame එකක් ලෙස සකසා පෙන්වීම
+                person_df = pd.DataFrame([valid_data])
+                st.dataframe(person_df, use_container_width=True)
         else:
             st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-          
+    
