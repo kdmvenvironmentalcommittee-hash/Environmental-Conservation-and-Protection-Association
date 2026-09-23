@@ -33,18 +33,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 1. Logo එක GitHub එකේ Upload කර ඇත්නම් එහි නම යොදන්න:
-logo_url = "logo.png"
+# Imgur Direct Image Link එක
+logo_url = "https://i.imgur.com/83pIs4x.png" 
 
 # Logo එක මැදට පෙන්වීම
 col1, col2, col3 = st.columns([1, 1, 1])
 with col2:
     try:
-        st.image(logo_url, width=140)
+        st.image(logo_url, width=150)
     except:
         pass
 
-# 2. මාතෘකා තුන මැදට (Center) කිරීම
+# මාතෘකා තුන මැදට (Center) කිරීම
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
