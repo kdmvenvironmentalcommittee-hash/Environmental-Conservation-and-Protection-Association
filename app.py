@@ -2,9 +2,10 @@ import streamlit as st
 import pandas as pd
 import re
 
-st.title("Information search system
-          Environmental Conservation and Protection Association
-          Program Administrator Division ")
+# App එකේ මාතෘකා සැකසීම
+st.title("Environmental Conservation and Protection Association")
+st.subheader("Information search system")
+st.caption("Program Administrator Division")
 
 # Google Sheet Direct CSV Link
 sheet_url = "https://docs.google.com/spreadsheets/d/1cl1wUgzu3LUVzHJEMItGYcY4SrwzNs5H9J84ekDMBz8/export?format=csv"
@@ -21,10 +22,9 @@ try:
     def clean_text(text):
         if pd.isna(text):
             return ""
-        # අකුරු සහ ඉලක්කම් හැර අනෙකුත් සලකුණු අයින් කර කුඩා අකුරට හැරවීම
         return re.sub(r'[^a-zA-Z0-9]', '', str(text)).lower()
 
-    search_query = st.text_input("ඔබගේ නම හෝ ID අංකය ඇතුළත් කරන්න:")
+    search_query = st.text_input("Enter your Name or ID Number / ඔබගේ නම හෝ ID අංකය ඇතුළත් කරන්න:")
 
     if search_query.strip():
         cleaned_query = clean_text(search_query)
@@ -39,11 +39,11 @@ try:
         filtered_df = df[mask]
 
         if not filtered_df.empty:
-            st.success("ඔබගේ විස්තර පහත දැක්වේ:")
+            st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
             st.dataframe(filtered_df, use_container_width=True)
         else:
-            st.warning("එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
+            st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
 
 except Exception as e:
-    st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions (Anyone with link) පරීක්ෂා කරන්න.")
-                                                   
+    st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
+          
