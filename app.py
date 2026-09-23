@@ -49,7 +49,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# මාතෘකා තුන මැදට (Center) කිරීම - Logo නොමැත
+# මාතෘකා තුන මැදට (Center) කිරීම
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
@@ -88,29 +88,14 @@ try:
         if not filtered_df.empty:
             st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
             
-            # හමුවූ සෑම පුද්ගලයෙකුටම අදාළ දත්ත පමණක් පෙන්වීම (Empty cells රහිතව)
+            # හිස් නැති සෛල (Non-empty cells) සහිත දත්ත පමණක් පෙන්වීම
             for idx, row in filtered_df.iterrows():
-                valid_data = {}
-                for col in df.columns:
-                    val = row[col]
-                    if pd.notna(val) and str(val).strip() != "":
-                        valid_data[col] = val
-                
-                person_df = pd.DataFrame([valid_data])
+                valid_row = row.dropna()
+                valid_row = valid_row[valid_row.astype(str).str.strip() != ""]
+                person_df = pd.DataFrame([valid_row])
                 st.dataframe(person_df, use_container_width=True)
         else:
             st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-                    if pd.notna(val) and str(val).strip() != "":
-                        valid_data[col] = val
-                
-                person_df = pd.DataFrame([valid_data])
-                st.dataframe(person_df, use_container_width=True)
-        else:
-            st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
-
-except Exception as e:
-    st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-    
