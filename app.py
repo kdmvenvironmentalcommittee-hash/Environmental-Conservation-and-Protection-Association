@@ -5,45 +5,60 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# CSS මඟින් Logo එක සහ Titles සියල්ල හරියටම මැදට (Center) කිරීම
+# Direct Ocean Video URL (No Redirection)
+video_url = "https://assets.mixkit.co/videos/preview/mixkit-dramatic-dark-stormy-sea-waves-42617-large.mp4"
+
+# CSS මඟින් Live Video Background එක සහ Text Styling සැකසීම
 st.markdown(
-    """
+    f"""
     <style>
-    .center-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-    .main-title {
-        font-size: 24px;
+    #bgVideo {{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        object-fit: cover;
+        filter: brightness(0.5); /* පසුබිම අඳුරු කර අකුරු පැහැදිලිව පෙන්වීමට */
+    }}
+
+    .main-title {{
+        font-size: 26px;
         font-weight: bold;
         text-align: center;
-        margin-top: 15px;
+        margin-top: 30px;
         margin-bottom: 5px;
-    }
-    .sub-title {
+        color: #FFFFFF;
+        text-shadow: 2px 2px 6px #000000;
+    }}
+    .sub-title {{
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        color: #B0B0B0;
+        color: #E0E0E0;
         margin-bottom: 5px;
-    }
-    .caption-title {
+        text-shadow: 1px 1px 4px #000000;
+    }}
+    .caption-title {{
         font-size: 14px;
         text-align: center;
-        color: #888888;
-        margin-bottom: 25px;
-    }
+        color: #CCCCCC;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 4px #000000;
+    }}
     </style>
+
+    <video autoplay loop muted playsinline id="bgVideo">
+        <source src="{video_url}" type="video/mp4">
+    </video>
     """,
     unsafe_allow_html=True
 )
 
-
-
-# මාතෘකා තුන මැදට (Center) කිරීම
+# මාතෘකා තුන මැදට (Center) කිරීම - Logo නොමැත
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
@@ -82,19 +97,14 @@ try:
         if not filtered_df.empty:
             st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
             
-            # හමුවූ සෑම පුද්ගලයෙකුටම අදාළ දත්ත පමණක් පෙන්වීම (Empty cells රහිතව)
+            # හිස් නැති සෛල (Non-empty cells) සහිත දත්ත පමණක් පෙන්වීම
             for idx, row in filtered_df.iterrows():
-                valid_data = {}
-                for col in df.columns:
-                    val = row[col]
-                    if pd.notna(val) and str(val).strip() != "":
-                        valid_data[col] = val
-                
-                person_df = pd.DataFrame([valid_data])
+                valid_row = row.dropna()
+                valid_row = valid_row[valid_row.astype(str).str.strip() != ""]
+                person_df = pd.DataFrame([valid_row])
                 st.dataframe(person_df, use_container_width=True)
         else:
             st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-
