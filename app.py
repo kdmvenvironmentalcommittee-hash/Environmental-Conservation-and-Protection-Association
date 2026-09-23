@@ -5,27 +5,35 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# CSS මඟින් titles මැදට (Center) කිරීම සහ Display හැඩගැන්වීම
+# CSS මඟින් Logo එක සහ Titles සියල්ල හරියටම මැදට (Center) කිරීම
 st.markdown(
     """
     <style>
+    .center-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
     .main-title {
         font-size: 24px;
         font-weight: bold;
         text-align: center;
+        margin-top: 15px;
         margin-bottom: 5px;
     }
     .sub-title {
         font-size: 18px;
         font-weight: 600;
         text-align: center;
-        color: #4A4A4A;
+        color: #B0B0B0;
         margin-bottom: 5px;
     }
     .caption-title {
         font-size: 14px;
         text-align: center;
-        color: #7A7A7A;
+        color: #888888;
         margin-bottom: 25px;
     }
     </style>
@@ -33,16 +41,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Imgur Direct Image Link එක
-logo_url = "https://i.imgur.com/83pIs4x.png" 
-
-# Logo එක මැදට පෙන්වීම
+# Logo එක මැදට පෙන්වීම (Columns 3ක් භාවිතයෙන් හරියටම මැදට ගෙන ඒම)
 col1, col2, col3 = st.columns([1, 1, 1])
 with col2:
     try:
-        st.image(logo_url, width=150)
-    except:
-        pass
+        # GitHub එකට Upload කළ logo.png එක මෙතැනින් ලබා ගනී
+        st.image("logo.png", width=160)
+    except Exception:
+        st.warning("logo.png පින්තූරය GitHub Repository එකේ හමු නොවීය.")
 
 # මාතෘකා තුන මැදට (Center) කිරීම
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
