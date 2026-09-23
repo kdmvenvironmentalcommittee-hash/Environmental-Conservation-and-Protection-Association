@@ -24,6 +24,3 @@ try:
             st.dataframe(filtered_df, use_container_width=True)
         else:
             st.warning("එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
-except Exception as e:
-    st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Link එක Anyone with the link ලෙස වෙනස් කර ඇත්දැයි බලන්න.")
-  
