@@ -5,28 +5,21 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# MoeWalls හි Ship In Storm Live Wallpaper Direct Video File URL එක
-video_url = "https://moewalls.com/wp-content/uploads/2022/10/ship-in-storm-preview.mp4"
+# Option 3: Dark Ocean & Glowing Lights Direct GIF URL
+bg_url = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VvZ290ZDRwbmtzOHByZXk1ZG8xeDV2NWYwazF6OHB4c2g4NWJnOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0xezQGU5xCDJuCPe/giphy.gif"
 
-# HTML & CSS මඟින් Live Video එක පසුබිම (Background) ලෙස සකස් කිරීම
+# CSS මඟින් Background එක සහ Text Styling සකස් කිරීම
 st.markdown(
     f"""
     <style>
-    /* Fullscreen background video styling */
-    #bgVideo {{
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
-        object-fit: cover;
-        filter: brightness(0.65); /* පසුබිම මඳක් අඳුරු කර අකුරු පැහැදිලිව පෙන්වීමට */
+    .stApp {{
+        background-image: url("{bg_url}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
-
-    /* Main Container & Titles Style */
+    
     .main-title {{
         font-size: 26px;
         font-weight: bold;
@@ -52,16 +45,11 @@ st.markdown(
         text-shadow: 1px 1px 4px #000000;
     }}
     </style>
-
-    <!-- HTML5 Auto-playing Live Video Background -->
-    <video autoplay loop muted playsinline id="bgVideo">
-        <source src="{video_url}" type="video/mp4">
-    </video>
     """,
     unsafe_allow_html=True
 )
 
-# මාතෘකා තුන මැදට (Center) කිරීම - Logo එක ඉවත් කර ඇත
+# මාතෘකා තුන මැදට (Center) කිරීම - Logo නොමැත
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
@@ -104,6 +92,17 @@ try:
             for idx, row in filtered_df.iterrows():
                 valid_data = {}
                 for col in df.columns:
+                    val = row[col]
+                    if pd.notna(val) and str(val).strip() != "":
+                        valid_data[col] = val
+                
+                person_df = pd.DataFrame([valid_data])
+                st.dataframe(person_df, use_container_width=True)
+        else:
+            st.warning("No records found / එබඳු නමක් හෝ අංකයක් පද්ධතියේ හමු නොවීය.")
+
+except Exception as e:
+    st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
                     val = row[col]
                     if pd.notna(val) and str(val).strip() != "":
                         valid_data[col] = val
