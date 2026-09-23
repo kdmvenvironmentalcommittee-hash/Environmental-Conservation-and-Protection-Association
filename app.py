@@ -7,7 +7,7 @@ st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
 # Live GIF / Background Image URL (ඔබ කැමති සජීවී GIF එකක URL එකක් මෙතැනට යොදන්න)
 # මෙතැන දැනට සොබාදහමට (Nature/Environment) අදාළ ලස්සන Live GIF එකක් යොදා ඇත.
-bg_gif_url = "https://moewalls.com/fantasy/ship-in-storm-live-wallpaper/"
+bg_gif_url = "[URL=https://moewalls.com/fantasy/ship-in-storm-live-wallpaper/][IMG]https://moewalls.com/wp-content/uploads/2026/04/ship-in-storm-thumb-728x410.jpg[/IMG][/URL]"
 
 # CSS මඟින් Live Background එකක් යෙදීම සහ Titles මැදට (Center) කිරීම
 st.markdown(
