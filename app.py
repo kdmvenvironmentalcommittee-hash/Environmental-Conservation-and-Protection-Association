@@ -34,7 +34,7 @@ st.markdown(
 )
 
 # 1. Logo එක GitHub එකේ Upload කර ඇත්නම් එහි නම යොදන්න:
-logo_url = "logo.png" 
+logo_url = "logo.png"
 
 # Logo එක මැදට පෙන්වීම
 col1, col2, col3 = st.columns([1, 1, 1])
