@@ -5,24 +5,19 @@ import re
 # Web Page එකෙහි Layout එක සැකසීම
 st.set_page_config(page_title="ECPA - Information Search", layout="centered")
 
-# Option 1: Direct Live Dark Ocean Video URL
-video_url = "https://assets.mixkit.co/videos/preview/mixkit-dramatic-dark-stormy-sea-waves-42617-large.mp4"
+# Direct Live Ocean GIF URL (CORS Block නොවෙන Direct Link එකක්)
+bg_gif_url = "https://images.squarespace-cdn.com/content/v1/5829e30a59cc683e9b11eb11/1517409249767-1XRFK3F2B6UOBB81WZXS/storm.gif"
 
-# CSS මඟින් Live Video Background එක සහ Text Styling සැකසීම
+# CSS මඟින් Live GIF Background එක සහ Text Styling සැකසීම
 st.markdown(
     f"""
     <style>
-    #bgVideo {{
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
-        object-fit: cover;
-        filter: brightness(0.55); /* පසුබිම අඳුරු කර අකුරු පැහැදිලිව පෙන්වීමට */
+    .stApp {{
+        background-image: url("{bg_gif_url}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }}
 
     .main-title {{
@@ -50,15 +45,11 @@ st.markdown(
         text-shadow: 1px 1px 4px #000000;
     }}
     </style>
-
-    <video autoplay loop muted playsinline id="bgVideo">
-        <source src="{video_url}" type="video/mp4">
-    </video>
     """,
     unsafe_allow_html=True
 )
 
-# මාතෘකා තුන මැදට (Center) කිරීම - Logo නොමැත
+# මාතෘකා තුන මැදට (Center) කිරීම
 st.markdown('<div class="main-title">Environmental Conservation and Protection Association</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Information search system</div>', unsafe_allow_html=True)
 st.markdown('<div class="caption-title">Program Administrator Division</div>', unsafe_allow_html=True)
@@ -92,7 +83,7 @@ try:
         if not mask.any():
             mask = df.apply(lambda row: row.astype(str).apply(lambda val: cleaned_query in clean_text(val))).any(axis=1)
 
-        filtered_df = df[mask]
+viral_df = df[mask]
 
         if not filtered_df.empty:
             st.success("Your details / ඔබගේ විස්තර පහත දැක්වේ:")
@@ -108,4 +99,3 @@ try:
 
 except Exception as e:
     st.error("Google Sheet එක කියවීමේ දෝෂයක් පවතී. කරුණාකර Access Permissions පරීක්ෂා කරන්න.")
-    
